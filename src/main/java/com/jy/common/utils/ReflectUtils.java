@@ -100,14 +100,18 @@ public class ReflectUtils {
             fileds = Arrays.stream(getAllField(oldClazz,true,true)).map(Field::getName).collect(Collectors.toList());
         }
         for (String field : fileds){
+            Class<?> fieldType = null;
             if(!isMap){
                 try {
-                    newClazz.getDeclaredField(field);
+                    fieldType = newClazz.getDeclaredField(field).getType();
                 } catch (NoSuchFieldException e) {
                     continue;
                 }
             }
             Object result = getResult(oldBean, field);
+            if(result == null || !result.getClass().equals(fieldType)){
+                continue;
+            }
             setProperty(newBean,field,result);
         }
     }
