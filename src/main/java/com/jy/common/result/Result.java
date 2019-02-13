@@ -1,8 +1,6 @@
 package com.jy.common.result;
 
 
-import com.jy.common.exception.BusinessException;
-
 /**
  * 统一响应
  * Created by jianglei on 18-1-6.
